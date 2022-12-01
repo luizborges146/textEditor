@@ -11,8 +11,11 @@ module.exports = () => {
     mode: 'development',
     entry: {
       main: './src/js/index.js',
-      install: './src/js/install.js'
-      // Check for missing entry
+      install: './src/js/install.js',
+      database: './src/js/database.js',
+      editor: './src/js/editor.js',
+      header: './src/js/header.js',
+
     },
     output: {
       filename: '[name].bundle.js',
@@ -22,7 +25,9 @@ module.exports = () => {
       // Webpack plugin that generates our html file and injects our bundles. 
       new HtmlWebpackPlugin({
         template: './index.html',
-        title: 'Contact Cards'
+        title: 'JATE',
+        //favicon is an icon that appears at the top of a browser tab.
+        favicon: 'favicon.ico',
         //
       }),
       // Injects our custom service worker
@@ -34,7 +39,7 @@ module.exports = () => {
       new WebpackPwaManifest({
         fingerprints: false,
         inject: true,
-        name: 'Another Text Editor',
+        name: 'Just Another Text Editor',
         short_name: 'JATA',
         description: 'Notes with JavaScript Syntax',
         background_color: '#225ca3',
@@ -59,7 +64,7 @@ module.exports = () => {
         },
         {
           test: /\.m?js$/,
-          exclude: /node_modules/,
+          exclude: /node_modules|bower_components/,
           // We use babel-loader in order to use ES6.
           use: {//
             loader: 'babel-loader',
